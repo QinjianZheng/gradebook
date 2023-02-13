@@ -4,9 +4,9 @@ namespace GradeBook.Tests;
 
 public class BookTests
 {
-  // "Fact" attribute
+  // Mark the method is a test
   [Fact]
-  public void Test1()
+  public void BookCalAnAverageGrade()
   {
     // arrange
     var book = new Book("Test Grade Book");

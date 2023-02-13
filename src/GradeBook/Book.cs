@@ -4,6 +4,7 @@ public class Book
   {
     _grades = new List<double>();
     _name = name;
+    Name = name;
   }
 
   public void AddGrade(double grade)
@@ -44,4 +45,5 @@ public class Book
 
   private List<double> _grades;
   private string _name;
+  public string Name { get; set; }
 }
