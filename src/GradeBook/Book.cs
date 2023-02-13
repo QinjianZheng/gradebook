@@ -30,14 +30,13 @@ public abstract class Book : NamedObject, IBook
   {
   }
 
-  public virtual event GradeAddedDelegate? GradeAdded;
+  public abstract event GradeAddedDelegate? GradeAdded;
 
   public abstract void AddGrade(double grade);
 
-  public virtual Statistics GetStatistics()
-  {
-    throw new NotImplementedException();
-  }
+  public abstract Statistics GetStatistics();
+
+
 }
 
 
@@ -94,18 +93,7 @@ public class InMemoryBook : Book
 
   }
 
-  public char GetLetterGrade(double grade)
-  {
-    switch (grade)
-    {
-      case var d when d >= 90d: return 'A';
-      case var d when d >= 80d: return 'B';
-      case var d when d >= 70d: return 'C';
-      case var d when d >= 60d: return 'D';
-      default: return 'F';
-    }
 
-  }
 
   public override Statistics GetStatistics()
 
@@ -116,27 +104,18 @@ public class InMemoryBook : Book
       throw new ArgumentException("No grades found in the grade book");
     }
 
-    var highGrade = double.MinValue;
-    var lowGrade = double.MaxValue;
-    var sum = 0d;
+    var result = new Statistics();
+
 
     foreach (var grade in _grades)
     {
-      highGrade = Math.Max(grade, highGrade);
-      lowGrade = Math.Min(grade, lowGrade);
-      sum += grade;
+      result.Add(grade);
+
     }
 
-    var averageGrade = sum / _grades.Count;
 
 
-    return new Statistics
-    {
-      Average = averageGrade,
-      High = highGrade,
-      Low = lowGrade,
-      Letter = GetLetterGrade(averageGrade)
-    };
+    return result;
   }
 
 

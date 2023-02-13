@@ -1,6 +1,6 @@
 ﻿using System;
 
-var book = new InMemoryBook("Neal's Book");
+IBook book = new DiskBook("Neal's Book");
 book.GradeAdded += OnGradeAdded;
 
 EnterGrades(book);
@@ -9,7 +9,6 @@ try
 
   var result = book.GetStatistics();
 
-  Console.WriteLine(InMemoryBook.CATEGORY);
   Console.WriteLine($"{book.Name} Stats");
   Console.WriteLine($"The highest grade is {result.High}");
   Console.WriteLine($"The lowest grade is {result.Low}");
