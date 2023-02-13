@@ -1,8 +1,9 @@
-class Book
+public class Book
 {
-  public Book()
+  public Book(string name)
   {
     _grades = new List<double>();
+    _name = name;
   }
 
   public void AddGrade(double grade)
@@ -15,7 +16,7 @@ class Book
     return _grades;
 
   }
-  public void ShowStats()
+  public Statistics GetStatistics()
   {
     var highGrade = double.MinValue;
     var lowGrade = double.MaxValue;
@@ -30,15 +31,17 @@ class Book
 
     var averageGrade = sum / _grades.Count;
 
-    Console.WriteLine($"{Name} Stats");
-    Console.WriteLine($"The highest grade is {highGrade:N1}");
-    Console.WriteLine($"The lowest grade is {lowGrade:N1}");
-    Console.WriteLine($"The average grade is {averageGrade:N1}");
-
+    return new Statistics
+    {
+      Average = averageGrade,
+      High = highGrade,
+      Low = lowGrade
+    };
   }
+
+  public string GetName() { return _name; }
 
 
   private List<double> _grades;
-  // private string _name;
-  public string? Name { get; set; }
+  private string _name;
 }
