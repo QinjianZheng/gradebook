@@ -3,9 +3,37 @@ using System;
 
 namespace GradeBook.Tests;
 
+public delegate string WriteLogDelegate(string logMessage);
+
+
 public class TypeTests
 {
 
+  int count = 0;
+
+  [Fact]
+  public void WriteLogDelegateCanPointToMethod()
+  {
+
+    WriteLogDelegate log = ReturnMessage;
+    log += ReturnMessage;
+    log += IncrementCount;
+    var result = log("test message");
+    // Assert.Equal("test message", result);
+    Assert.Equal(3, count);
+  }
+  private string IncrementCount(string message)
+  {
+
+    count++;
+    return message.ToLower();
+  }
+  private string ReturnMessage(string message)
+  {
+
+    count++;
+    return message;
+  }
 
   [Fact]
   public void StringsBehaveLikeValueTypes()
