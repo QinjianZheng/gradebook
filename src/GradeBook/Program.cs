@@ -1,13 +1,46 @@
-﻿var book = new Book("Neal's Book");
-book.AddGrade(90.1);
-book.AddGrade(89.6);
-book.GetGrades().Add(20);
+﻿using System;
+
+var book = new Book("Neal's Book");
 
 
-var result = book.GetStatistics();
+while (true)
+{
+
+  Console.WriteLine("Please enter a grade or 'q' to quit");
+  var input = Console.ReadLine();
+  if (input == "q" || input is null)
+  {
+    break;
+  }
+
+  try
+  {
+    var grade = double.Parse(input);
+    book.AddGrade(grade);
+
+  }
+  catch (Exception e)
+  {
+    Console.WriteLine(e.Message);
+  }
 
 
-Console.WriteLine($"{book.GetName()} Stats");
-Console.WriteLine($"The highest grade is {result.High}");
-Console.WriteLine($"The lowest grade is {result.Low}");
-Console.WriteLine($"The average grade is {result.Average:N1}");
+}
+try
+{
+
+  var result = book.GetStatistics();
+  Console.WriteLine($"{book.GetName()} Stats");
+  Console.WriteLine($"The highest grade is {result.High}");
+  Console.WriteLine($"The lowest grade is {result.Low}");
+  Console.WriteLine($"The average grade is {result.Average:N1}");
+  Console.WriteLine($"The letter grade is {result.Letter}");
+}
+catch (Exception e)
+{
+  Console.WriteLine(e.Message);
+
+}
+
+
+
