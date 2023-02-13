@@ -1,7 +1,10 @@
 ﻿using System;
 
 var book = new Book("Neal's Book");
-
+book.GradeAdded += OnGradeAdded;
+book.GradeAdded += OnGradeAdded;
+book.GradeAdded -= OnGradeAdded;
+book.GradeAdded += OnGradeAdded;
 
 while (true)
 {
@@ -44,5 +47,8 @@ catch (Exception e)
 
 }
 
-
+static void OnGradeAdded(object sender, EventArgs e)
+{
+  Console.WriteLine("A grade is added");
+}
 

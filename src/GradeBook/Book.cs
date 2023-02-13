@@ -1,3 +1,8 @@
+// event delegate convention
+// two arguments
+public delegate void GradeAddedDelegate(object sender, EventArgs args);
+
+
 public class Book
 {
   public Book(string name)
@@ -30,6 +35,10 @@ public class Book
     {
 
       _grades.Add(grade);
+      if (GradeAdded != null)
+      {
+        GradeAdded(this, new EventArgs());
+      }
     }
     else
     {
@@ -37,6 +46,8 @@ public class Book
       throw new ArgumentException($"Invalid {nameof(grade)}");
     }
   }
+
+  public event GradeAddedDelegate? GradeAdded;
 
   public List<double> GetGrades()
   {
