@@ -3,11 +3,12 @@ public class Book
   public Book(string name)
   {
     _grades = new List<double>();
-    _name = name;
     Name = name;
   }
 
-  public void AddLetterGrade(char letter)
+
+  // method overloading
+  public void AddGrade(char letter)
   {
     switch (letter)
     {
@@ -88,10 +89,9 @@ public class Book
     };
   }
 
-  public string GetName() { return _name; }
-
 
   private List<double> _grades;
-  private string _name;
   public string Name { get; set; }
+
+  public const string CATEGORY = "Science";
 }

@@ -30,7 +30,9 @@ try
 {
 
   var result = book.GetStatistics();
-  Console.WriteLine($"{book.GetName()} Stats");
+
+  Console.WriteLine(Book.CATEGORY);
+  Console.WriteLine($"{book.Name} Stats");
   Console.WriteLine($"The highest grade is {result.High}");
   Console.WriteLine($"The lowest grade is {result.Low}");
   Console.WriteLine($"The average grade is {result.Average:N1}");
