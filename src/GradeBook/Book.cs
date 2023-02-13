@@ -3,10 +3,49 @@
 public delegate void GradeAddedDelegate(object sender, EventArgs args);
 
 
-public class Book
+public class NamedObject
 {
-  public Book(string name)
+  public NamedObject(string name)
   {
+    Name = name;
+  }
+
+  public string Name
+  {
+    get; set;
+  }
+}
+
+public interface IBook
+{
+  void AddGrade(double grade);
+  Statistics GetStatistics();
+  string Name { get; }
+  event GradeAddedDelegate GradeAdded;
+}
+
+public abstract class Book : NamedObject, IBook
+{
+  protected Book(string name) : base(name)
+  {
+  }
+
+  public virtual event GradeAddedDelegate? GradeAdded;
+
+  public abstract void AddGrade(double grade);
+
+  public virtual Statistics GetStatistics()
+  {
+    throw new NotImplementedException();
+  }
+}
+
+
+public class InMemoryBook : Book
+{
+  public InMemoryBook(string name) : base(name)
+  {
+
     _grades = new List<double>();
     Name = name;
   }
@@ -29,7 +68,7 @@ public class Book
     }
   }
 
-  public void AddGrade(double grade)
+  public override void AddGrade(double grade)
   {
     if (grade <= 100 && grade >= 0)
     {
@@ -47,7 +86,7 @@ public class Book
     }
   }
 
-  public event GradeAddedDelegate? GradeAdded;
+  public override event GradeAddedDelegate? GradeAdded;
 
   public List<double> GetGrades()
   {
@@ -68,7 +107,7 @@ public class Book
 
   }
 
-  public Statistics GetStatistics()
+  public override Statistics GetStatistics()
 
   {
 
@@ -102,7 +141,6 @@ public class Book
 
 
   private List<double> _grades;
-  public string Name { get; set; }
 
   public const string CATEGORY = "Science";
 }
